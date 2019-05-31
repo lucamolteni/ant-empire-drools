@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.FactHandle;
 
 import static org.junit.Assert.*;
 
@@ -20,24 +19,33 @@ public class AntEmpireTest extends BaseModelTest {
         Path path = Paths.get(resource.toURI());
         final String rules = new String(Files.readAllBytes(path));
 
-        KieSession kSession = getKieSession(rules);
+        KieSession session = getKieSession(rules);
 
         Cell center = new Cell(4, 4);
         Cell right = new Cell(5, 0);
 
-        FactHandle rightFH = kSession.insert(right);
-        FactHandle centerFh = kSession.insert(center);
+        session.insert(center);
 
-        int firstFire = kSession.fireAllRules();
-        assertEquals(2, firstFire);
+        int firstFire = session.fireAllRules();
+        assertEquals(1, firstFire);
+        System.out.println();
 
-        Worker worker = new Worker();
+        Ant worker = new Worker();
         center.setAnt(worker);
-        kSession.insert(worker);
+        session.insert(worker);
 
-        int workerRules = kSession.fireAllRules();
-        assertEquals(2, workerRules);
+        int workerRules = session.fireAllRules();
+        assertEquals(3, workerRules);
+        System.out.println();
 
+        Ant queen1 = new Queen();
+        right.setAnt(queen1);
+        session.insert(queen1);
+        session.insert(right);
+
+        int queenFire = session.fireAllRules();
+        assertEquals(4, queenFire);
+        System.out.println();
 
     }
 }

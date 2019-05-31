@@ -1,20 +1,19 @@
 package com.antempire
 
 
-rule "first rule"
+rule "log new cell inserted"
     when
         $c : Cell()
     then
         System.out.println("Cell inserted: " + $c);
 end
 
-rule "alert producing cell"
+rule "log new ant inserted"
     when
-        $c : Cell(producing == true)
+        $a : Ant()
     then
-        System.out.println("Cell producing: " + $c);
+        System.out.println("Ant inserted: " + $a);
 end
-
 
 rule "start production when inserting an ant"
     when
@@ -25,4 +24,11 @@ rule "start production when inserting an ant"
         modify($c) {
             setProducing(true);
         }
+end
+
+rule "alert producing cell"
+    when
+        $c : Cell(producing == true)
+    then
+        System.out.println("Cell producing: " + $c);
 end
