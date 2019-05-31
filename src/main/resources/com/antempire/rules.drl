@@ -26,6 +26,20 @@ rule "start production when inserting an ant"
         }
 end
 
+rule "stop production when two adjacent queen"
+    when
+        $c1 : Cell($x1: x , $y1 : y, ant!.queen)
+        $c2 : Cell(x == $x1 - 1, y == $y1, ant!.queen)
+    then
+        System.out.println("Two adjacent queens: " + $c1 + " " + $c2);
+        modify($c1) {
+            setProducing(false);
+        }
+        modify($c2) {
+            setProducing(false);
+        }
+end
+
 rule "alert producing cell"
     when
         $c : Cell(producing == true)

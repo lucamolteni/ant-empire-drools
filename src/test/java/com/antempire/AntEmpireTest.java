@@ -23,40 +23,43 @@ public class AntEmpireTest extends BaseModelTest {
         KieSession session = getKieSession(rules);
 
         Cell center = new Cell(4, 4);
-        Cell right = new Cell(5, 0);
+        Cell right = new Cell(5, 4);
 
         FactHandle centerFH = session.insert(center);
         FactHandle rightFH = session.insert(right);
 
-        int firstFire = session.fireAllRules();
-        assertEquals(2, firstFire);
+        session.fireAllRules();
         System.out.println();
 
+        // Center produces with a worker
         Ant worker = new Worker();
         center.setAnt(worker);
         session.insert(worker);
         session.update(centerFH, center);
 
-        int workerRules = session.fireAllRules();
-        assertEquals(4, workerRules);
+        session.fireAllRules();
         System.out.println();
+        assertTrue(center.isProducing());
 
+        // Right produces with a queen
         Ant queen1 = new Queen();
         right.setAnt(queen1);
         session.insert(queen1);
         session.update(rightFH, right);
 
-        int queenFire = session.fireAllRules();
-        assertEquals(4, queenFire);
+        session.fireAllRules();
+        assertTrue(right.isProducing());
         System.out.println();
 
+        // Two adjacent queen stops production
         Ant queen2 = new Queen();
         center.setAnt(queen2);
         session.insert(queen2);
         session.update(centerFH, center);
 
-        int queenFire2 = session.fireAllRules();
-        assertEquals(4, queenFire2);
+        session.fireAllRules();
+        assertFalse(center.isProducing());
+        assertFalse(right.isProducing());
         System.out.println();
 
     }

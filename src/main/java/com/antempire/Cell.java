@@ -43,6 +43,7 @@ public class Cell {
         final StringBuilder sb = new StringBuilder("Cell{");
         sb.append("x=").append(x);
         sb.append(", y=").append(y);
+        sb.append(", ant=").append(ant);
         sb.append('}');
         return sb.toString();
     }
