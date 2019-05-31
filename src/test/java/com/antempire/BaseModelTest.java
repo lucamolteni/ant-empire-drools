@@ -3,6 +3,7 @@ package com.antempire;
 import java.util.List;
 import java.util.UUID;
 
+import org.drools.compiler.kie.builder.impl.DrlProject;
 import org.drools.modelcompiler.ExecutableModelProject;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieBuilder;
@@ -38,7 +39,7 @@ public abstract class BaseModelTest {
             kfs.write(kieFile.path, kieFile.content);
         }
 
-        KieBuilder kieBuilder1 = ks.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);
+        KieBuilder kieBuilder1 = ks.newKieBuilder(kfs).buildAll(DrlProject.class);
 
         List<Message> messages = kieBuilder1.getResults().getMessages();
         if (!messages.isEmpty()) {
