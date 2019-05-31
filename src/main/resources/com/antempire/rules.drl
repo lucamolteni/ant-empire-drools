@@ -5,15 +5,23 @@ rule "first rule"
     when
         $c : Cell()
     then
-        System.out.println("Cell inserted: " + $c.getAnt());
+        System.out.println("Cell inserted: " + $c);
+end
+
+rule "alert producing cell"
+    when
+        $c : Cell(producing == true)
+    then
+        System.out.println("Cell producing: " + $c);
 end
 
 
 rule "start production when inserting an ant"
     when
-        $c : Cell(ant != null)
+        $a: Ant()
+        $c : Cell(ant == $a)
     then
-        System.out.println("Ant present starting production");
+        System.out.println("Ant: " + $a + " set to cell: " + $c);
         modify($c) {
             setProducing(true);
         }

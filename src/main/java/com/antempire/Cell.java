@@ -1,7 +1,5 @@
 package com.antempire;
 
-import java.util.Optional;
-
 public class Cell {
 
     private final int x;
@@ -38,5 +36,14 @@ public class Cell {
 
     public void setAnt(Ant ant) {
         this.ant = ant;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Cell{");
+        sb.append("x=").append(x);
+        sb.append(", y=").append(y);
+        sb.append('}');
+        return sb.toString();
     }
 }
