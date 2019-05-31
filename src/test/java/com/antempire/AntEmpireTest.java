@@ -50,5 +50,14 @@ public class AntEmpireTest extends BaseModelTest {
         assertEquals(4, queenFire);
         System.out.println();
 
+        Ant queen2 = new Queen();
+        center.setAnt(queen2);
+        session.insert(queen2);
+        session.update(centerFH, center);
+
+        int queenFire2 = session.fireAllRules();
+        assertEquals(4, queenFire2);
+        System.out.println();
+
     }
 }
