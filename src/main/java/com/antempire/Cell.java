@@ -1,10 +1,15 @@
 package com.antempire;
 
+import java.util.Optional;
+
 public class Cell {
 
-    private boolean isProducing = false;
     private final int x;
     private final int y;
+
+
+    private boolean isProducing = false;
+    private Ant ant;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -25,5 +30,13 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+
+    public Ant getAnt() {
+        return ant;
+    }
+
+    public void setAnt(Ant ant) {
+        this.ant = ant;
     }
 }

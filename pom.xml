@@ -8,16 +8,8 @@
     <artifactId>droolsjbpm-integration</artifactId>
     <version>7.23.0-SNAPSHOT</version>
   </parent>
-
-  <properties>
-    <generateModel>YES</generateModel>
-    <generateDMNModel>YES</generateDMNModel>
-  </properties>
-
   <groupId>org.kie</groupId>
-  <artifactId>kie-maven-plugin-example</artifactId>
-
-  <packaging>kjar</packaging>
+  <artifactId>ant-empire-drools</artifactId>
 
   <dependencies>
     <dependency>
@@ -57,14 +49,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-maven-plugin</artifactId>
-        <version>${project.version}</version>
-        <extensions>true</extensions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

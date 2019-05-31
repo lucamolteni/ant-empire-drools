@@ -3,7 +3,18 @@ package com.antempire
 
 rule "first rule"
     when
-        c : Cell()
+        $c : Cell()
     then
-        System.out.println("Cell inserted");
+        System.out.println("Cell inserted: " + $c.getAnt());
+end
+
+
+rule "start production when inserting an ant"
+    when
+        $c : Cell(ant != null)
+    then
+        System.out.println("Ant present starting production");
+        modify($c) {
+            setProducing(true);
+        }
 end
