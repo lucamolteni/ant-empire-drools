@@ -1,0 +1,9 @@
+package com.antempire
+
+
+rule "first rule"
+    when
+        c : Cell()
+    then
+        System.out.println("Cell inserted");
+end
